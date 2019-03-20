@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <stack>
 
 /*
 *define binary tree node
@@ -68,6 +69,11 @@ public:
     *二叉树中所有节点之间的距离的最大值就是二叉树的直径
     */
     int GetMaxPathOfTree(CBinaryTreeNode *root);
+
+    /*
+    *Path to root
+    */
+    bool GetPathToRoot(CBinaryTreeNode *root, int value, std::stack<CBinaryTreeNode*> &stk);
 
 private:
 	CBinaryTreeNode *getNewTreeNode();

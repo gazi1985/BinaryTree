@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <stack>
 
 using namespace std;
 
@@ -35,8 +36,25 @@ int main(int argc, char* argv[])
     //cout << "Leafs number:" << leafNnm << endl;
 
     //Max path
-    int maxPath = tree->GetMaxPathOfTree(treeRoot);
-    cout << "Max path:" << maxPath << endl;
+    //int maxPath = tree->GetMaxPathOfTree(treeRoot);
+    //cout << "Max path:" << maxPath << endl;
+
+    //Path to root
+    stack<CBinaryTreeNode*> stk;
+    if (tree->GetPathToRoot(treeRoot, 31, stk))
+    {
+        cout << "Path to root is:";
+        while (!stk.empty())
+        {
+            CBinaryTreeNode *node = stk.top();
+            if (node)
+            {
+                cout << node->value << " ";
+            }
+            stk.pop();
+        }
+        cout << endl;
+    }
 
     cout <<endl<< "***************End*****************" << endl;
     cout << "Press any key to exit:" << endl;

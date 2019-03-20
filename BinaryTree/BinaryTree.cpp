@@ -196,6 +196,32 @@ int CBinaryTree::GetMaxPathOfTree(CBinaryTreeNode *root)
     return maxPath;
 }
 
+
+bool CBinaryTree::GetPathToRoot(CBinaryTreeNode *node, int value, std::stack<CBinaryTreeNode*> &stk)
+{
+    bool bValide = false;
+
+    if (!node)
+        return bValide;
+
+    stk.push(node);
+    if (node->value == value)
+    {
+        bValide = true;
+    }
+    else
+    {
+        bValide = GetPathToRoot(node->pLeft, value, stk);
+        if (!bValide)
+            bValide = GetPathToRoot(node->pRight, value, stk);
+
+        if (!bValide)
+            stk.pop();
+    }
+
+    return bValide;
+}
+
 /*
 *
 */
