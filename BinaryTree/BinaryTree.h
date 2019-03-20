@@ -41,7 +41,7 @@ public:
     void TraverseByPostOrder(CBinaryTreeNode *root);
 
     /*
-    *Tree Depth:根节点到叶子节点最大值
+    *Tree Depth:树的深度：根节点到叶子节点最大值
     */
     int GetDepthOfTree(CBinaryTreeNode *root);
 
@@ -50,11 +50,19 @@ public:
     */
     int GetWidthOfTree(CBinaryTreeNode *root);
 
+    /*
+    *Level node number:level层 节点数
+    *
+    */
+    int GetLevelNumOfTree(CBinaryTreeNode *root, int level, bool bRecusion = true);
+
 
 private:
 	CBinaryTreeNode *getNewTreeNode();
     CBinaryTreeNode* addNode(CBinaryTreeNode *pNode, int v);
 
+    int _GetLevelNumOfTree(CBinaryTreeNode *root, int level);
+    int _GetLevelNumOfTreeByRecusion(CBinaryTreeNode *root, int level);
 private:
 	CBinaryTreeNode *m_pBTree;
 };

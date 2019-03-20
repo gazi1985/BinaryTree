@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
     
     CBinaryTree *tree = new CBinaryTree;
     CBinaryTreeNode* treeRoot = tree->CreateBinaryTree(datas);
-    cout << "********************************" << endl;
+    cout << "***************Begin*****************" << endl;
     //Traverse
     //tree->TraverseByMidOrder(treeRoot);
     //cout << "********************************" << endl;
@@ -24,6 +24,15 @@ int main(int argc, char* argv[])
     int width = tree->GetWidthOfTree(treeRoot);
     cout << "Width of the tree is:" << width << endl;
 
+    //Level Num
+    //int level = 5;
+    ////int num = tree->GetLevelNumOfTree(treeRoot, level, false);
+    //int num = tree->GetLevelNumOfTree(treeRoot, level);
+    //cout << "Level" << level << " Number of the tree is:" << num << endl;
+
+
+    cout <<endl<< "***************End*****************" << endl;
+    cout << "Press any key to exit:" << endl;
     while (1)
     {
         if(getchar())
