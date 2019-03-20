@@ -1,9 +1,11 @@
 #include "BinaryTree.h"
 
+#include <iostream>
+
 using namespace std;
 
 CBinaryTree::CBinaryTree(void):
-	m_pBTree(0)
+	m_pBTree(nullptr)
 {
 }
 
@@ -12,56 +14,67 @@ CBinaryTree::~CBinaryTree(void)
 {
 }
 
+/*
+*
+*/
 void CBinaryTree::CreateBinaryTree( vector<int> &datas )
 {
-	if (!m_pBTree)
-		m_pBTree = getNewTreeNode();
 	if(datas.size() ==0)
 		return;
-	m_pBTree->value = datas.at(0);
-	for(int i = 1; i < datas.size(); ++i)
+
+    CBinaryTreeNode* pNode = nullptr;
+	for(int i = 0; i < datas.size(); ++i)
 	{
-		int v = datas.at(i);
-		if (v < m_pBTree->value)
-			addLeftNode(m_pBTree, v);
-		else
-			addRightNode(m_pBTree, v);
+        pNode = addNode(pNode, datas.at(i));
 	}
 
+    m_pBTree = pNode;
 }
 
-void CBinaryTree::addLeftNode( CBinaryTreeNode *pNode, int v)
+
+void CBinaryTree::TraverseByPrevOrder(CBinaryTreeNode *root)
 {
-	CBinaryTreeNode *pLeft = pNode->pLeft;
-	if (!pLeft)
-	{
-		pLeft = getNewTreeNode();
-		pLeft->value = v;
-	}
-	else
-	{
-		if (v < pLeft->value)
-			addLeftNode(pLeft, v);
-		else
-			addRightNode(pLeft, v);
-	}
+    if (!root)
+        return;
+    cout << root->value << endl;
+    TraverseByPrevOrder(root->pLeft);
+    TraverseByPrevOrder(root->pRight);
 }
 
-void CBinaryTree::addRightNode( CBinaryTreeNode *pNode, int v)
+void CBinaryTree::TraverseByMidOrder(CBinaryTreeNode *root)
 {
-	CBinaryTreeNode *pRight = pNode->pRight;
-	if (!pRight)
-	{
-		pRight = getNewTreeNode();
-		pRight->value = v;
-	}
-	else
-	{
-		if (v < pRight->value)
-			addLeftNode(pRight, v);
-		else
-			addRightNode(pRight, v);
-	}
+    if (!root)
+        return;
+    TraverseByPrevOrder(root->pLeft);
+    cout << root->value << endl;
+    TraverseByPrevOrder(root->pRight);
+}
+
+void CBinaryTree::TraverseByPostOrder(CBinaryTreeNode *root)
+{
+    if (!root)
+        return;
+    TraverseByPrevOrder(root->pLeft);
+    TraverseByPrevOrder(root->pRight);
+    cout << root->value << endl;
+}
+
+CBinaryTreeNode* CBinaryTree::addNode(CBinaryTreeNode *pNode, int v)
+{
+    if (!pNode)
+    {
+        pNode = getNewTreeNode();
+        pNode->value = v;
+    }
+    else
+    {
+        if (v < pNode->value)
+            pNode->pLeft = addNode(pNode->pLeft, v);
+        else
+            pNode->pRight = addNode(pNode->pRight, v);
+    }
+
+    return pNode;
 }
 
 CBinaryTreeNode* CBinaryTree::getNewTreeNode()

@@ -28,12 +28,20 @@ public:
 	~CBinaryTree(void);
 
 public:
+    /*
+    *Create
+    */
 	void CreateBinaryTree(std::vector<int> &datas);
+
+    void TraverseByPrevOrder(CBinaryTreeNode *root);
+    void TraverseByMidOrder(CBinaryTreeNode *root);
+    void TraverseByPostOrder(CBinaryTreeNode *root);
+
+
 
 private:
 	CBinaryTreeNode *getNewTreeNode();
-	void addLeftNode(CBinaryTreeNode *pNode, int v);
-	void addRightNode(CBinaryTreeNode *pNode, int v);
+    CBinaryTreeNode* addNode(CBinaryTreeNode *pNode, int v);
 
 private:
 	CBinaryTreeNode *m_pBTree;
