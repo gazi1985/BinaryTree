@@ -17,18 +17,20 @@ CBinaryTree::~CBinaryTree(void)
 /*
 *
 */
-void CBinaryTree::CreateBinaryTree( vector<int> &datas )
+CBinaryTreeNode* CBinaryTree::CreateBinaryTree( vector<int> &datas )
 {
 	if(datas.size() ==0)
-		return;
+		return nullptr;
 
     CBinaryTreeNode* pNode = nullptr;
-	for(int i = 0; i < datas.size(); ++i)
+	for(size_t i = 0; i < datas.size(); ++i)
 	{
         pNode = addNode(pNode, datas.at(i));
 	}
 
     m_pBTree = pNode;
+    
+    return m_pBTree;
 }
 
 
@@ -45,17 +47,17 @@ void CBinaryTree::TraverseByMidOrder(CBinaryTreeNode *root)
 {
     if (!root)
         return;
-    TraverseByPrevOrder(root->pLeft);
+    TraverseByMidOrder(root->pLeft);
     cout << root->value << endl;
-    TraverseByPrevOrder(root->pRight);
+    TraverseByMidOrder(root->pRight);
 }
 
 void CBinaryTree::TraverseByPostOrder(CBinaryTreeNode *root)
 {
     if (!root)
         return;
-    TraverseByPrevOrder(root->pLeft);
-    TraverseByPrevOrder(root->pRight);
+    TraverseByPostOrder(root->pLeft);
+    TraverseByPostOrder(root->pRight);
     cout << root->value << endl;
 }
 

@@ -31,8 +31,11 @@ public:
     /*
     *Create
     */
-	void CreateBinaryTree(std::vector<int> &datas);
+    CBinaryTreeNode* CreateBinaryTree(std::vector<int> &datas);
 
+    /*
+    *Traverse
+    */
     void TraverseByPrevOrder(CBinaryTreeNode *root);
     void TraverseByMidOrder(CBinaryTreeNode *root);
     void TraverseByPostOrder(CBinaryTreeNode *root);
