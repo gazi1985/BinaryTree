@@ -52,10 +52,22 @@ public:
 
     /*
     *Level node number:level层 节点数
-    *
+    *param1: Tree root node
+    *param2: level
+    *param3: bRecusion 是否采用递归
     */
     int GetLevelNumOfTree(CBinaryTreeNode *root, int level, bool bRecusion = true);
 
+    /*
+    *Tree leafs number:叶子节点
+    */
+    int GetNumOfLeafsInTree(CBinaryTreeNode *root);
+
+    /*
+    *Tree max path
+    *二叉树中所有节点之间的距离的最大值就是二叉树的直径
+    */
+    int GetMaxPathOfTree(CBinaryTreeNode *root);
 
 private:
 	CBinaryTreeNode *getNewTreeNode();
@@ -63,7 +75,7 @@ private:
 
     int _GetLevelNumOfTree(CBinaryTreeNode *root, int level);
     int _GetLevelNumOfTreeByRecusion(CBinaryTreeNode *root, int level);
+    int _getDepthOfTree(CBinaryTreeNode *node, int &maxPath);
 private:
 	CBinaryTreeNode *m_pBTree;
 };
-

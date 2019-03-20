@@ -152,6 +152,50 @@ int CBinaryTree::GetLevelNumOfTree(CBinaryTreeNode *root, int level, bool bRecus
         return _GetLevelNumOfTree(root, level);
 }
 
+int CBinaryTree::GetNumOfLeafsInTree(CBinaryTreeNode *root)
+{
+    int num = 0;
+    if (!root)
+        return num;
+
+    if (!root->pLeft && !root->pRight)
+    {
+        num = 1;
+    }
+    else
+    {
+        num = GetNumOfLeafsInTree(root->pLeft);
+        num += GetNumOfLeafsInTree(root->pRight);
+    }
+
+    return num;
+}
+
+//思路：最大路径肯定是：某节点的 左子树深度（可能为空:0）+ 右子树深度（可能为空:0）
+int CBinaryTree::GetMaxPathOfTree(CBinaryTreeNode *root)
+{
+    int maxPath = 0;
+    if (!root)
+        return maxPath;
+    //Slow
+    /*maxPath = GetDepthOfTree(root->pLeft) + GetDepthOfTree(root->pRight);
+    int leftPath = GetMaxPathOfTree(root->pLeft);
+    int rightPath = GetMaxPathOfTree(root->pRight);
+
+    if (leftPath > maxPath)
+        maxPath = leftPath;
+    if (rightPath > maxPath)
+        maxPath = rightPath;*/
+
+    //Fast
+    //思路：最大路径肯定是：某节点的 左子树深度（可能为空:0）+ 右子树深度（可能为空:0）
+    //既然和深度有关，那么就在获取深度信息的时候，把每个节点的最大路径算出来，最大值就是树的最大路径
+    //（这样看来，最大路径只是个‘附属’结果）
+    _getDepthOfTree(root, maxPath);
+
+    return maxPath;
+}
+
 /*
 *
 */
@@ -230,6 +274,29 @@ int CBinaryTree::_GetLevelNumOfTreeByRecusion(CBinaryTreeNode *root, int level)
     }
 
     return num;
+}
+
+/*
+* _getDepthOfTree从表面看 是在获取node的深度，但是在获取的过程中，
+* 却‘意外’获取了最长路径 :)
+*/
+int CBinaryTree::_getDepthOfTree(CBinaryTreeNode *node, int &maxPath)
+{
+    int depth = -1;
+    if (!node)
+        return depth;
+    
+    int leftDepth = _getDepthOfTree(node->pLeft, maxPath) + 1;
+    int rightDepth = _getDepthOfTree(node->pRight, maxPath) + 1;
+    
+    //Core
+    int _path = leftDepth + rightDepth;
+    if (_path > maxPath)
+        maxPath = _path;
+    //Core
+    
+    depth = leftDepth > rightDepth ? leftDepth : rightDepth;
+    return depth ;
 }
 
 /*

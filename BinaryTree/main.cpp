@@ -30,6 +30,13 @@ int main(int argc, char* argv[])
     //int num = tree->GetLevelNumOfTree(treeRoot, level);
     //cout << "Level" << level << " Number of the tree is:" << num << endl;
 
+    //Leafs number
+    //int leafNnm = tree->GetNumOfLeafsInTree(treeRoot);
+    //cout << "Leafs number:" << leafNnm << endl;
+
+    //Max path
+    int maxPath = tree->GetMaxPathOfTree(treeRoot);
+    cout << "Max path:" << maxPath << endl;
 
     cout <<endl<< "***************End*****************" << endl;
     cout << "Press any key to exit:" << endl;
