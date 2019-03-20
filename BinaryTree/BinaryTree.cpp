@@ -1,6 +1,7 @@
 #include "BinaryTree.h"
 
 #include <iostream>
+#include <queue>
 
 using namespace std;
 
@@ -59,6 +60,69 @@ void CBinaryTree::TraverseByPostOrder(CBinaryTreeNode *root)
     TraverseByPostOrder(root->pLeft);
     TraverseByPostOrder(root->pRight);
     cout << root->value << endl;
+}
+
+
+int CBinaryTree::GetDepthOfTree(CBinaryTreeNode *root)
+{
+    if (!root)
+        return 0;
+    
+    int leftDepth = GetDepthOfTree(root->pLeft) + 1;
+    int rightDepth = GetDepthOfTree(root->pRight) + 1;
+
+    return leftDepth > rightDepth ? leftDepth : rightDepth;
+}
+
+int CBinaryTree::GetWidthOfTree(CBinaryTreeNode *root)
+{
+    int maxWidth = 0;
+
+    if (!root)
+        return maxWidth;
+
+    //log
+    int level = 1;
+    int maxLevel = 1;
+    //log
+
+    queue<CBinaryTreeNode*> nodeQue;
+    nodeQue.push(root);
+    while (true)
+    {
+        int width = nodeQue.size();
+        if (0 == width)
+            break;
+
+        //log
+        cout << "Level-" << level << " node num:" << width << endl;
+        //log
+
+        if (width > maxWidth)
+        {
+            maxWidth = width;
+            maxLevel = level;
+        }
+        
+        for (size_t i = 0; i < width; ++i)
+        {
+            CBinaryTreeNode *node = nodeQue.front();
+            nodeQue.pop();
+            if (!node)
+                continue;
+            if (node->pLeft)
+                nodeQue.push(node->pLeft);
+            if (node->pRight)
+                nodeQue.push(node->pRight);
+        }
+        level++;
+    }
+
+    //log
+    cout << "Max level is:" << maxLevel << "  Node num:" << maxWidth << endl;
+    //log
+
+    return maxWidth;
 }
 
 CBinaryTreeNode* CBinaryTree::addNode(CBinaryTreeNode *pNode, int v)

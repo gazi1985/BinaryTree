@@ -40,6 +40,15 @@ public:
     void TraverseByMidOrder(CBinaryTreeNode *root);
     void TraverseByPostOrder(CBinaryTreeNode *root);
 
+    /*
+    *Tree Depth:根节点到叶子节点最大值
+    */
+    int GetDepthOfTree(CBinaryTreeNode *root);
+
+    /*
+    *Tree Width:层节点数最大值
+    */
+    int GetWidthOfTree(CBinaryTreeNode *root);
 
 
 private:
