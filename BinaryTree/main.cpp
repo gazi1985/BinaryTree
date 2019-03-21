@@ -9,22 +9,22 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    vector<int> datas = {28, 30, 17, 7, 18, 29, 37, 31, 38};
+    vector<int> datas = {28, 30, 17, 7, 18, 29, 37, 31, 38, 40 };
     
     CBinaryTree *tree = new CBinaryTree;
     CBinaryTreeNode* treeRoot = tree->CreateBinaryTree(datas);
     cout << "***************Begin*****************" << endl;
     //Traverse
-    //tree->TraverseByMidOrder(treeRoot);
-    //cout << "********************************" << endl;
+    tree->TraverseByPrevOrder(treeRoot);
+    cout << "********************************" << endl;
 
     //Depth
     //int depth = tree->GetDepthOfTree(treeRoot);
     //cout << "Depth of the tree is:" << depth << endl;
 
     //Width
-    int width = tree->GetWidthOfTree(treeRoot);
-    cout << "Width of the tree is:" << width << endl;
+    //int width = tree->GetWidthOfTree(treeRoot);
+    //cout << "Width of the tree is:" << width << endl;
 
     //Level Num
     //int level = 5;
@@ -57,14 +57,23 @@ int main(int argc, char* argv[])
     }*/
 
     //Get Close parent node test
-    int v1 = 7;
+    /*int v1 = 7;
     int v2 = 38;
     CBinaryTreeNode *parnet = tree->GetCloseParentInTree(treeRoot, v1, v2);
     if (parnet)
     {
         cout << "V1-" << v1 << " and V2-" << v2 <<" closeed parent is:"<< parnet->value << endl;
-    }
+    }*/
 
+    //Invert tree
+    /*tree->InvertBinaryTree(treeRoot);
+    cout << "After invert:" << endl;
+    tree->TraverseByPrevOrder(treeRoot);*/
+
+    //AVL Tree
+    //after datas append 40,tree is not AVL tree
+    int depth = 0;
+    cout << "AVL Tree:" << (int)tree->IsAVLBinaryTree(treeRoot, depth) << endl;
 
     cout <<endl<< "***************End*****************" << endl;
     cout << "Press any key to exit:" << endl;

@@ -258,6 +258,54 @@ CBinaryTreeNode * CBinaryTree::GetCloseParentInTree(CBinaryTreeNode *root, int v
     return parentNode;
 }
 
+void CBinaryTree::InvertBinaryTree(CBinaryTreeNode *root)
+{
+    if (!root)
+        return;
+
+    CBinaryTreeNode *tempNode = root->pLeft;
+    root->pLeft = root->pRight;
+    root->pRight = tempNode;
+
+    InvertBinaryTree(root->pLeft);
+    InvertBinaryTree(root->pRight);
+}
+
+bool CBinaryTree::IsAVLBinaryTree(CBinaryTreeNode *root, int &depth)
+{
+    bool bAVL = false;
+
+    if (!root)
+    {
+        bAVL = true;
+        depth = 0;
+        return bAVL;
+    }
+    int value = root->value;
+    int leftDepth = 0;
+    int rightDepth = 0;
+    if (IsAVLBinaryTree(root->pLeft, leftDepth) &&
+        IsAVLBinaryTree(root->pRight, rightDepth))
+    {
+        int tmp;
+        if (leftDepth >= rightDepth)
+        {
+            tmp = leftDepth - rightDepth;
+            depth = (leftDepth + 1);
+        }
+        else
+        {
+            tmp = rightDepth - leftDepth;
+            depth = (rightDepth + 1);
+        }
+
+        if (tmp <= 1)
+            bAVL = true;
+    }
+
+    return bAVL;
+}
+
 /*
 *
 */
