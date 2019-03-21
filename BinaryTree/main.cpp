@@ -18,7 +18,7 @@ void loop()
 
 int main(int argc, char* argv[])
 {
-    vector<int> datas = {28, 30, 17, 7, 18, 29, 37, 31, 38};
+    vector<int> datas = {28, 30, 17, 7, 18, 29, 37, 31, 38;
     
     CBinaryTree *tree = new CBinaryTree;
     CBinaryTreeNode* treeRoot = tree->CreateBinaryTree(datas);
@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
     tree->TraverseByPrevOrder(treeRoot);*/
 
     //AVL Tree
-    //after datas append 40,tree is not AVL tree
+    //Test:: After datas append 40,tree is not AVL tree
     /*int depth = 0;
     cout << "AVL Tree:" << (int)tree->IsAVLBinaryTree(treeRoot, depth) << endl;*/
 
@@ -88,6 +88,7 @@ int main(int argc, char* argv[])
     cout << "Is Complete Tree:" << (int)tree->IsCompleteBinaryTree(treeRoot) << endl;
     cout << "After invert tree" << endl;
     tree->InvertBinaryTree(treeRoot);
+    //Test:: After datas append '40',the inverted tree is not complete
     cout << "Is Complete Tree:" << (int)tree->IsCompleteBinaryTree(treeRoot) << endl;
 
     cout <<endl<< "***************End*****************" << endl;

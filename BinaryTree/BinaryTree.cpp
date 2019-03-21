@@ -190,7 +190,6 @@ int CBinaryTree::GetMaxPathOfTree(CBinaryTreeNode *root)
     //Fast
     //思路：最大路径肯定是：某节点的 左子树深度（可能为空:0）+ 右子树深度（可能为空:0）
     //既然和深度有关，那么就在获取深度信息的时候，把每个节点的最大路径算出来，最大值就是树的最大路径
-    //（这样看来，最大路径只是个‘附属’结果）
     _getDepthOfTree(root, maxPath);
 
     return maxPath;
@@ -348,29 +347,27 @@ bool CBinaryTree::IsCompleteBinaryTree(CBinaryTreeNode *root)
                 CBinaryTreeNode *node = nodeQ.front();
                 nodeQ.pop();
 
-                int value = node->value;
-                if (node->pLeft)
+                if (!node->pLeft && node->pRight)
                 {
-                    if (!hasNull)
-                        nodeQ.push(node->pLeft);
-                    else
-                        return bComplete;
+                    bComplete = false;
+                    return bComplete;
                 }
-                else if(!hasNull)
-                    hasNull = true;
 
-                if (node->pRight)
+                if (bComplete && (node->pLeft || node->pRight))
                 {
-                    if (!hasNull)
-                        nodeQ.push(node->pRight);
-                    else
-                        return bComplete;
-                } 
-                else if (!hasNull)
-                    hasNull = true;
+                    bComplete = false;
+                    return bComplete;
+                }
+
+                if (!node->pLeft || !node->pRight)
+                    bComplete = true;
+
+                if (node->pLeft)
+                    nodeQ.push(node->pLeft);
+                if (node->pRight)
+                    nodeQ.push(node->pRight);
             }
         }
-        bComplete = true;
     } while (false);
 
     return bComplete;
