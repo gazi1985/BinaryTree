@@ -7,9 +7,18 @@
 
 using namespace std;
 
+void loop()
+{
+    while (1)
+    {
+        if (getchar())
+            break;
+    }
+}
+
 int main(int argc, char* argv[])
 {
-    vector<int> datas = {28, 30, 17, 7, 18, 29, 37, 31, 38, 40 };
+    vector<int> datas = {28, 30, 17, 7, 18, 29, 37, 31, 38};
     
     CBinaryTree *tree = new CBinaryTree;
     CBinaryTreeNode* treeRoot = tree->CreateBinaryTree(datas);
@@ -72,18 +81,21 @@ int main(int argc, char* argv[])
 
     //AVL Tree
     //after datas append 40,tree is not AVL tree
-    int depth = 0;
-    cout << "AVL Tree:" << (int)tree->IsAVLBinaryTree(treeRoot, depth) << endl;
+    /*int depth = 0;
+    cout << "AVL Tree:" << (int)tree->IsAVLBinaryTree(treeRoot, depth) << endl;*/
+
+    //Complete tree
+    cout << "Is Complete Tree:" << (int)tree->IsCompleteBinaryTree(treeRoot) << endl;
+    cout << "After invert tree" << endl;
+    tree->InvertBinaryTree(treeRoot);
+    cout << "Is Complete Tree:" << (int)tree->IsCompleteBinaryTree(treeRoot) << endl;
 
     cout <<endl<< "***************End*****************" << endl;
-    cout << "Press any key to exit:" << endl;
-    while (1)
-    {
-        if(getchar())
-            break;
-    }
     delete tree;
     tree = nullptr;
+
+    cout << "Press any key to exit:" << endl;
+    loop();
 
     return -1;
 }

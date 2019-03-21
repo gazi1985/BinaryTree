@@ -82,7 +82,7 @@ public:
     CBinaryTreeNode *GetCloseParentInTree(CBinaryTreeNode *root, int value1, int value2);
 
     /*
-    *Get close parent
+    *Invert Tree
     */
     void InvertBinaryTree(CBinaryTreeNode *root);
 
@@ -90,6 +90,11 @@ public:
     *AVL Tree
     */
     bool IsAVLBinaryTree(CBinaryTreeNode *root, int &depth);
+
+    /*
+    *Complete Tree
+    */
+    bool IsCompleteBinaryTree(CBinaryTreeNode *root);
 
 private:
 	CBinaryTreeNode *getNewTreeNode();

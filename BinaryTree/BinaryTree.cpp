@@ -271,6 +271,10 @@ void CBinaryTree::InvertBinaryTree(CBinaryTreeNode *root)
     InvertBinaryTree(root->pRight);
 }
 
+/*
+*平衡二叉树定义：
+*它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树(AVL树)
+*/
 bool CBinaryTree::IsAVLBinaryTree(CBinaryTreeNode *root, int &depth)
 {
     bool bAVL = false;
@@ -304,6 +308,72 @@ bool CBinaryTree::IsAVLBinaryTree(CBinaryTreeNode *root, int &depth)
     }
 
     return bAVL;
+}
+
+/*
+*当遍历同层次节点时，如果遇到在本层本节点左边存在为空的节点，此树不完整
+*If hasNull = true when current level push node, we can say the tree is not complete
+*/
+bool CBinaryTree::IsCompleteBinaryTree(CBinaryTreeNode *root)
+{
+    bool bComplete = false;
+    if (!root)
+        return bComplete;
+
+    do 
+    {
+        if (!root->pLeft && !root->pRight)
+        {
+            bComplete = true;
+            break;
+        }
+
+        if (root->pRight && !root->pLeft)
+        {
+            break;
+        }
+
+        queue<CBinaryTreeNode*> nodeQ;
+        nodeQ.push(root->pLeft);
+        if(root->pRight)
+            nodeQ.push(root->pRight);
+
+        while (!nodeQ.empty())
+        {
+            int lenght = nodeQ.size();
+            //if hasNull = true when current level push node, we can say the tree is not complete  
+            bool hasNull = false;
+            for (int i = 0; i < lenght; ++i)
+            {
+                CBinaryTreeNode *node = nodeQ.front();
+                nodeQ.pop();
+
+                int value = node->value;
+                if (node->pLeft)
+                {
+                    if (!hasNull)
+                        nodeQ.push(node->pLeft);
+                    else
+                        return bComplete;
+                }
+                else if(!hasNull)
+                    hasNull = true;
+
+                if (node->pRight)
+                {
+                    if (!hasNull)
+                        nodeQ.push(node->pRight);
+                    else
+                        return bComplete;
+                } 
+                else if (!hasNull)
+                    hasNull = true;
+            }
+        }
+        bComplete = true;
+    } while (false);
+
+    return bComplete;
 }
 
 /*
