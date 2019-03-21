@@ -18,7 +18,7 @@ void loop()
 
 int main(int argc, char* argv[])
 {
-    vector<int> datas = {28, 30, 17, 7, 18, 29, 37, 31, 38;
+    vector<int> datas = { 28, 30, 17, 7, 18, 29, 37, 31, 38 };
     
     CBinaryTree *tree = new CBinaryTree;
     CBinaryTreeNode* treeRoot = tree->CreateBinaryTree(datas);
