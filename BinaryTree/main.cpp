@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stack>
+#include <list>
 
 using namespace std;
 
@@ -40,21 +41,30 @@ int main(int argc, char* argv[])
     //cout << "Max path:" << maxPath << endl;
 
     //Path to root
-    stack<CBinaryTreeNode*> stk;
+    /*list<CBinaryTreeNode*> stk;
     if (tree->GetPathToRoot(treeRoot, 31, stk))
     {
         cout << "Path to root is:";
-        while (!stk.empty())
+        for (auto iter = stk.begin(); iter != stk.end(); ++iter)
         {
-            CBinaryTreeNode *node = stk.top();
+            CBinaryTreeNode *node = *iter;
             if (node)
             {
                 cout << node->value << " ";
             }
-            stk.pop();
         }
         cout << endl;
+    }*/
+
+    //Get Close parent node test
+    int v1 = 7;
+    int v2 = 38;
+    CBinaryTreeNode *parnet = tree->GetCloseParentInTree(treeRoot, v1, v2);
+    if (parnet)
+    {
+        cout << "V1-" << v1 << " and V2-" << v2 <<" closeed parent is:"<< parnet->value << endl;
     }
+
 
     cout <<endl<< "***************End*****************" << endl;
     cout << "Press any key to exit:" << endl;

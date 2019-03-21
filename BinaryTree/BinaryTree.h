@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <stack>
+#include <list>
 
 /*
 *define binary tree node
@@ -73,7 +74,12 @@ public:
     /*
     *Path to root
     */
-    bool GetPathToRoot(CBinaryTreeNode *root, int value, std::stack<CBinaryTreeNode*> &stk);
+    bool GetPathToRoot(CBinaryTreeNode *root, int value, std::list<CBinaryTreeNode*> &stk);
+
+    /*
+    *Get close parent 
+    */
+    CBinaryTreeNode *GetCloseParentInTree(CBinaryTreeNode *root, int value1, int value2);
 
 private:
 	CBinaryTreeNode *getNewTreeNode();

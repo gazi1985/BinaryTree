@@ -196,15 +196,18 @@ int CBinaryTree::GetMaxPathOfTree(CBinaryTreeNode *root)
     return maxPath;
 }
 
-
-bool CBinaryTree::GetPathToRoot(CBinaryTreeNode *node, int value, std::stack<CBinaryTreeNode*> &stk)
+/*
+* Get path to root
+* Note:之所以用list是因为，获取路径的方法会应用到其他功能中，使用list容易获取数据
+*/
+bool CBinaryTree::GetPathToRoot(CBinaryTreeNode *node, int value, list<CBinaryTreeNode*> &stk)
 {
     bool bValide = false;
 
     if (!node)
         return bValide;
 
-    stk.push(node);
+    stk.push_front(node);
     if (node->value == value)
     {
         bValide = true;
@@ -216,10 +219,43 @@ bool CBinaryTree::GetPathToRoot(CBinaryTreeNode *node, int value, std::stack<CBi
             bValide = GetPathToRoot(node->pRight, value, stk);
 
         if (!bValide)
-            stk.pop();
+            stk.pop_front();
     }
 
     return bValide;
+}
+
+CBinaryTreeNode * CBinaryTree::GetCloseParentInTree(CBinaryTreeNode *root, int value1, int value2)
+{
+    CBinaryTreeNode *parentNode = nullptr;
+
+    list<CBinaryTreeNode*> stkA;
+    list<CBinaryTreeNode*> stkB;
+    if (GetPathToRoot(root, value1, stkA) &&
+        GetPathToRoot(root, value2, stkB))
+    {
+        if (stkA.empty() || stkB.empty())
+            return parentNode;
+        
+        //Find the node from the back of list
+        while (!stkA.empty() && !stkB.empty())
+        {
+            CBinaryTreeNode* node = stkA.back();
+            if (!node)
+            {
+                parentNode = nullptr;
+                break;
+            }
+                
+            if (node != stkB.back())
+                break;
+            parentNode = node;
+            stkA.pop_back();
+            stkB.pop_back();
+        }
+     }
+
+    return parentNode;
 }
 
 /*
